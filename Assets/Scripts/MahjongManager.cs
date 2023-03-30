@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MahjongManager : MonoBehaviour
+using Manager.Game;
+using Manager.Bar;
+namespace Manager.Mahjong 
 {
-    public static MahjongManager Instance;
-    public Transform MahjongContainer;
-    private void Awake() {
-        Instance = this;
-    }
-    void Start()
+    public class MahjongManager : MonoBehaviour
     {
-        
+        public static MahjongManager Instance;
+        public Transform MahjongContainer;
+        private void Awake() {
+            Instance = this;
+        }
+        void Start()
+        {
+            
+        }
+
+        void Update()
+        {
+            
+        }
     }
 
-    void Update()
-    {
-        
-    }
 }
