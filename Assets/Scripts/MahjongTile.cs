@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using Classification;
 using Manager.Game;
 using Manager.Bar;
+using Manager.Audio;
 using DG.Tweening;
 using Slot;
 namespace Tile 
@@ -28,27 +29,29 @@ namespace Tile
        
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            if(!AbleToInteract) return;
+            if(!AbleToInteract || !GameManager.Instance.GlobalMahjongAbleToInteract) return;
+            AudioManager.Instance.DownSound.Play();
             Tweening(GameManager.Instance.GlobalTileSizeDown,GameManager.Instance.GlobalTileDuration,GameManager.Instance.GlobalTileEaseInteraction);
         }   
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if(!AbleToInteract) return;
+            if(!AbleToInteract ) return;
+            AudioManager.Instance.PopSound.Play();
             Tweening(GameManager.Instance.GlobalTileSizeEnter,GameManager.Instance.GlobalTileDuration,GameManager.Instance.GlobalTileEaseInteraction);
             OnHover = true;
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if(!AbleToInteract) return;
+            if(!AbleToInteract ) return;
             Tweening(GameManager.Instance.GlobalTileSizeLeave,GameManager.Instance.GlobalTileDuration,GameManager.Instance.GlobalTileEaseInteraction);
             OnHover = false;
         }
         
         async void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
         {
-            if(!AbleToInteract) return;
+            if(!AbleToInteract || !GameManager.Instance.GlobalMahjongAbleToInteract) return;
             Tweening(GameManager.Instance.GlobalTileSizeLeave,GameManager.Instance.GlobalTileDuration,GameManager.Instance.GlobalTileEaseInteraction);
             if(OnHover)
             {
@@ -77,6 +80,7 @@ namespace Tile
                                                       GetChild(slot2.transform.GetSiblingIndex() + 1).GetComponent<Slots>();
                                     if(listMajongRemainingTiles.Count != 0)
                                         BarManager.Instance.MoveTiles(listMajongRemainingTiles);
+                                    GameManager.Instance.GlobalMahjongAbleToInteract = false;
                                     await emptySlot.AttachTile(this,true); 
                                     listMajongSameTiles.Add(this);
                                     BarManager.Instance.ThreeSameTilesFound(listMajongSameTiles,listMajongRemainingTiles);

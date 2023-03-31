@@ -22,9 +22,10 @@ namespace Manager.Game
         public Vector3 GlobalTileSizeDown;
         public Vector3 TileToSlotAutoPos;
         public Vector3 TileToSlotAutoScale;
-        
+        public bool GlobalMahjongAbleToInteract;
         private void Awake() {
             Instance = this;
+            GlobalMahjongAbleToInteract = true;
         }
         void Start()
         {

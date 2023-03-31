@@ -55,6 +55,7 @@ namespace Manager.Bar
                 }
                 if(listMahjongTiles.Count == attachedIndex ) break;
             }
+            GameManager.Instance.GlobalMahjongAbleToInteract = true;
         }
         public List<MahjongTile>  GetRemainingTiles(int indexStart)
         {
@@ -74,7 +75,16 @@ namespace Manager.Bar
             foreach (MahjongTile item in listMahjongTiles)
                 Destroy(item.gameObject);
             if(remainingTiles.Count > 0)    
+            {
                 ResetTilesPosition(remainingTiles);
+
+            }
+            else 
+            {
+                GameManager.Instance.GlobalMahjongAbleToInteract = true;
+                
+            }
+              
         }
         void Start()
         {
