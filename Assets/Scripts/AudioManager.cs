@@ -9,6 +9,7 @@ namespace Manager.Audio
         public AudioSource PopSound;
         public AudioSource DownSound;
         public AudioSource UpSound;
+        public AudioSource ExplodeSound;
         private void Awake() {
             Instance = this;
         }

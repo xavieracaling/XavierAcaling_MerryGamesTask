@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Manager.Game;
 using Manager.Mahjong;
+using Manager.Audio;
 using Tile;
 using Classification;
 using Slot;
@@ -71,9 +72,13 @@ namespace Manager.Bar
         public async Task ThreeSameTilesFound(List<MahjongTile> listMahjongTiles, List<MahjongTile> remainingTiles)
         {
             Debug.Log("Same three Tiles!!");
-            await new WaitForSeconds(0.6f);
+            await new WaitForSeconds(0.2f);
+            AudioManager.Instance.ExplodeSound.Play();
             foreach (MahjongTile item in listMahjongTiles)
-                Destroy(item.gameObject);
+            {
+                item.ExplosionPS.Play();
+                Destroy(item.gameObject,0.6f);
+            }
             if(remainingTiles.Count > 0)    
             {
                 ResetTilesPosition(remainingTiles);

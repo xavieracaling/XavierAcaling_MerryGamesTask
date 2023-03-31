@@ -18,6 +18,8 @@ namespace Tile
         public MahjongType TypeM { get => typeM; set => typeM = TypeM;}
         public bool AbleToInteract;
         public bool OnHover;
+        public ParticleSystem ExplosionPS;
+
         private void Awake() {
             AbleToInteract = true;
             spriteRenderer = GetComponent<SpriteRenderer>();
