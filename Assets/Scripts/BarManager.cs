@@ -21,26 +21,39 @@ namespace Manager.Bar
         {
             foreach (MahjongTile item in listMahjongTiles)
             {
-                if(item.transform.parent.GetSiblingIndex() == transform.childCount - 1)
+                if(item.transform.parent.GetSiblingIndex() == BarContainer.transform.childCount - 1)
                     break;
+                int currentSlotIndex = item.transform.parent.GetSiblingIndex() ;
                 int nextSlotIndex = item.transform.parent.GetSiblingIndex() + 1;
+                Slots currentSlot = BarContainer.transform.GetChild(currentSlotIndex).GetComponent<Slots>();
+                currentSlot.TileMahjong = null;
                 Slots newSlotToTransfer = BarContainer.transform.GetChild(nextSlotIndex).GetComponent<Slots>();
                 newSlotToTransfer.AttachTile(item,true);
             }
         }
-        public void ResetTilesPosition(List<MahjongTile> listMahjongTiles)
+        public async void ResetTilesPosition(List<MahjongTile> listMahjongTiles)
         {
-            foreach (Transform item in BarContainer.transform)
-            {
-                Slots slot = item.GetComponent<Slots>();
-                slot.TileMahjong = null;
-            }
+            // foreach (Transform item in BarContainer.transform)
+            // {
+            //     Slots slot = item.GetComponent<Slots>();
+            //     slot.TileMahjong = null;
+            // }
+            Debug.Log("reseting tileposition");
+            await new WaitForSeconds(0.17f);
+            int attachedIndex = 0;
+            foreach (MahjongTile m in listMahjongTiles)
+                m.transform.parent.GetComponent<Slots>().TileMahjong = null;
             for (int i = 0; i < BarContainer.transform.childCount; i++)
             {
                 Slots slot = BarContainer.transform.GetChild(i).GetComponent<Slots>();
+                Debug.Log("getting");
                 if(slot.TileMahjong == null)
-                    slot.AttachTile(listMahjongTiles[i],false);
-                if(listMahjongTiles.Count == i + 1) break;
+                {
+                    Debug.Log("looking");
+                    slot.AttachTile(listMahjongTiles[attachedIndex],false);
+                    attachedIndex++;
+                }
+                if(listMahjongTiles.Count == attachedIndex ) break;
             }
         }
         public List<MahjongTile>  GetRemainingTiles(int indexStart)

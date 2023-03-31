@@ -110,6 +110,14 @@ namespace Tile
                 
             }
         }
+        private void OnDestroy() {
+            bool hasSlotComponent = transform.parent.GetComponent<Slots>();
+            if(hasSlotComponent)
+            {
+                Slots slots = transform.parent.GetComponent<Slots>();
+                slots.TileMahjong = null;
+            }
+        }
         public void SetMahjongType (MahjongType type)
         {
             TypeM = type;
