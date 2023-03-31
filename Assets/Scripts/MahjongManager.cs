@@ -12,15 +12,6 @@ namespace Manager.Mahjong
         private void Awake() {
             Instance = this;
         }
-        void Start()
-        {
-            
-        }
-
-        void Update()
-        {
-            
-        }
     }
 
 }

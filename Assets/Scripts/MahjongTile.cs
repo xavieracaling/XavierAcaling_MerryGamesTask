@@ -21,6 +21,9 @@ namespace Tile
             AbleToInteract = true;
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
+        private void Start() {
+            gameObject.name = TypeM.ToString();
+        }
         public void Tweening(Vector3 pos, float duration, Ease ease) => transform.DOScale(pos,duration).SetEase(ease);
        
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
