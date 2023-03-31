@@ -55,6 +55,7 @@ namespace Tile
             Tweening(GameManager.Instance.GlobalTileSizeLeave,GameManager.Instance.GlobalTileDuration,GameManager.Instance.GlobalTileEaseInteraction);
             if(OnHover)
             {
+                AudioManager.Instance.UpSound.Play();
                 AbleToInteract = false;
                 foreach (Transform item in BarManager.Instance.BarContainer)
                 {
