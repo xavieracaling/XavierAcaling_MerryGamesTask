@@ -14,12 +14,14 @@ namespace Manager.Game
         public Dictionary<MahjongType,Sprite> MahjongDictionarySprite = new Dictionary<MahjongType, Sprite>();
         public List<Sprite> MahjongSpriteTiles = new List<Sprite>();
         [Header("Mahjong Dotweens")]
-        public Ease GlobalTileEase;
+        public Ease GlobalTileEaseAttachment;
+        public Ease GlobalTileEaseInteraction;
         public float GlobalTileDuration;
         public Vector3 GlobalTileSizeEnter;
         public Vector3 GlobalTileSizeLeave;
         public Vector3 GlobalTileSizeDown;
         public Vector3 TileToSlotAutoPos;
+        public Vector3 TileToSlotAutoScale;
         
         private void Awake() {
             Instance = this;
