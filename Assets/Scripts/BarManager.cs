@@ -24,7 +24,19 @@ namespace Manager.Bar
                     break;
                 int nextSlotIndex = item.transform.parent.GetSiblingIndex() + 1;
                 Slots newSlotToTransfer = BarContainer.transform.GetChild(nextSlotIndex).GetComponent<Slots>();
-                newSlotToTransfer.AttachTile(item);
+                newSlotToTransfer.AttachTile(item,false);
+            }
+        }
+        public void ResetTilesPosition(List<MahjongTile> listMahjongTiles)
+        {
+            for (int i = 0; i < BarContainer.transform.childCount; i++)
+            {
+                Slots slot = BarContainer.transform.GetChild(i).GetComponent<Slots>();
+                if(slot.TileMahjong != null)
+                {
+                    slot.AttachTile(listMahjongTiles[i],false);
+                }
+                if(listMahjongTiles.Count == i + 1) break;
             }
         }
         public List<MahjongTile>  GetRemainingTiles(int indexStart)
@@ -38,11 +50,13 @@ namespace Manager.Bar
             }
             return listMahjongTiles;
         }
-        public void ThreeSameTilesFound(List<MahjongTile> listMahjongTiles)
+        public void ThreeSameTilesFound(List<MahjongTile> listMahjongTiles, List<MahjongTile> remainingTiles)
         {
             Debug.Log("Same three Tiles!!");
             foreach (MahjongTile item in listMahjongTiles)
                 Destroy(item.gameObject);
+            if(remainingTiles.Count > 0)
+                ResetTilesPosition(remainingTiles);
         }
         void Start()
         {

@@ -74,9 +74,9 @@ namespace Tile
                                                       GetChild(slot2.transform.GetSiblingIndex() + 1).GetComponent<Slots>();
                                     if(listMajongRemainingTiles.Count != 0)
                                         BarManager.Instance.MoveTiles(listMajongRemainingTiles);
-                                    await emptySlot.AttachTile(this); 
+                                    await emptySlot.AttachTile(this,true); 
                                     listMajongSameTiles.Add(this);
-                                    BarManager.Instance.ThreeSameTilesFound(listMajongSameTiles);
+                                    BarManager.Instance.ThreeSameTilesFound(listMajongSameTiles,listMajongRemainingTiles);
                                     break;
                                 }
                                 else 
@@ -87,7 +87,7 @@ namespace Tile
                                     if(listMajongRemainingTiles.Count != 0)
                                     {
                                         BarManager.Instance.MoveTiles(listMajongRemainingTiles);
-                                        await slot2.AttachTile(this); 
+                                        await slot2.AttachTile(this,true); 
                                         break;
                                     }
                                     
@@ -98,7 +98,7 @@ namespace Tile
                     else 
                     {
                         Debug.Log("To attch null");
-                        await slot.AttachTile(this); 
+                        await slot.AttachTile(this,true); 
                         break;
                     }
                     
