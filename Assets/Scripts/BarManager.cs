@@ -40,17 +40,16 @@ namespace Manager.Bar
             //     slot.TileMahjong = null;
             // }
             Debug.Log("reseting tileposition");
-            await new WaitForSeconds(0.17f);
             int attachedIndex = 0;
             foreach (MahjongTile m in listMahjongTiles)
                 m.transform.parent.GetComponent<Slots>().TileMahjong = null;
+            await new WaitForSeconds(0.61f);
+            AudioManager.Instance.UpSound.Play();
             for (int i = 0; i < BarContainer.transform.childCount; i++)
             {
                 Slots slot = BarContainer.transform.GetChild(i).GetComponent<Slots>();
-                Debug.Log("getting");
                 if(slot.TileMahjong == null)
                 {
-                    Debug.Log("looking");
                     slot.AttachTile(listMahjongTiles[attachedIndex],false);
                     attachedIndex++;
                 }

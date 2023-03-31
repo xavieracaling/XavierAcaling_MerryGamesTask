@@ -13,13 +13,12 @@ namespace Slot
         public MahjongTile TileMahjong;
         public async Task AttachTile(MahjongTile mahjongTile, bool doLocalJump)
         {
-          
             TileMahjong = mahjongTile;
             mahjongTile.transform.DOKill();
             mahjongTile.transform.SetParent(transform) ;
             mahjongTile.transform.localScale = GameManager.Instance.TileToSlotAutoScale;
             await MoveDoTween(mahjongTile,doLocalJump);
-       
+
         }
         public async Task MoveDoTween(MahjongTile mahjongTile,bool doLocalJump)
         {
