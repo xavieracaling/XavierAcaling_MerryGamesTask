@@ -18,8 +18,9 @@ namespace Manager.Bar
         private void Awake() {
             Instance = this;
         }
-        public void MoveTiles(List<MahjongTile> listMahjongTiles)
+        public async void MoveTiles(List<MahjongTile> listMahjongTiles)
         {
+            GameManager.Instance.GlobalMahjongAbleToInteract = false;
             foreach (MahjongTile item in listMahjongTiles)
             {
                 if(item.transform.parent.GetSiblingIndex() == BarContainer.transform.childCount - 1)
@@ -27,10 +28,14 @@ namespace Manager.Bar
                 int currentSlotIndex = item.transform.parent.GetSiblingIndex() ;
                 int nextSlotIndex = item.transform.parent.GetSiblingIndex() + 1;
                 Slots newSlotToTransfer = BarContainer.transform.GetChild(nextSlotIndex).GetComponent<Slots>();
-                newSlotToTransfer.AttachTile(item,true);
                 Slots currentSlot = BarContainer.transform.GetChild(currentSlotIndex).GetComponent<Slots>();
                 currentSlot.TileMahjong = null;
+                // await new WaitForSeconds(0.2f);
+                newSlotToTransfer.AttachTile(item,true);
+                
             }
+            await new WaitForSeconds(0.1f);
+            GameManager.Instance.GlobalMahjongAbleToInteract = true;
         }
         public async void ResetTilesPosition(List<MahjongTile> listMahjongTiles)
         {

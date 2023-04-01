@@ -81,9 +81,9 @@ namespace Tile
                                                                                  GetRemainingTiles(slot2.transform.GetSiblingIndex() + 1);
                                     Slots emptySlot = BarManager.Instance.BarContainer.
                                                       GetChild(slot2.transform.GetSiblingIndex() + 1).GetComponent<Slots>();
+                                    GameManager.Instance.GlobalMahjongAbleToInteract = false;
                                     if(listMajongRemainingTiles.Count != 0)
                                         BarManager.Instance.MoveTiles(listMajongRemainingTiles);
-                                    GameManager.Instance.GlobalMahjongAbleToInteract = false;
                                     await emptySlot.AttachTile(this,true); 
                                     listMajongSameTiles.Add(this);
                                     BarManager.Instance.ThreeSameTilesFound(listMajongSameTiles,listMajongRemainingTiles);
@@ -119,11 +119,11 @@ namespace Tile
         }
         private void OnDestroy() {
             bool hasSlotComponent = transform.parent.GetComponent<Slots>();
-            if(hasSlotComponent)
-            {
-                Slots slots = transform.parent.GetComponent<Slots>();
-                slots.TileMahjong = null;
-            }
+            // if(hasSlotComponent)
+            // {
+            //     Slots slots = transform.parent.GetComponent<Slots>();
+            //     slots.TileMahjong = null;
+            // }
         }
         public void SetMahjongType (MahjongType type)
         {

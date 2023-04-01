@@ -14,6 +14,7 @@ namespace Slot
         public ParticleSystem SmokeEffect;
         public async Task AttachTile(MahjongTile mahjongTile, bool doLocalJump)
         {
+            TileMahjong = null; 
             TileMahjong = mahjongTile;
             mahjongTile.transform.DOKill();
             mahjongTile.transform.SetParent(transform) ;
@@ -32,6 +33,7 @@ namespace Slot
                                             GameManager.Instance.GlobalTileDuration).
                                             SetEase(GameManager.Instance.GlobalTileEaseAttachment).AsyncWaitForCompletion();
             SmokeEffect.Play();
+            TileMahjong = mahjongTile;
         }
          void Start()
         {
