@@ -11,6 +11,7 @@ namespace Slot
     public class Slots : MonoBehaviour
     {
         public MahjongTile TileMahjong;
+        public ParticleSystem SmokeEffect;
         public async Task AttachTile(MahjongTile mahjongTile, bool doLocalJump)
         {
             TileMahjong = mahjongTile;
@@ -30,6 +31,7 @@ namespace Slot
                 await mahjongTile.transform.DOLocalMove(GameManager.Instance.TileToSlotAutoPos,
                                             GameManager.Instance.GlobalTileDuration).
                                             SetEase(GameManager.Instance.GlobalTileEaseAttachment).AsyncWaitForCompletion();
+            SmokeEffect.Play();
         }
          void Start()
         {

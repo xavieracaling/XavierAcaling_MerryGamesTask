@@ -26,10 +26,10 @@ namespace Manager.Bar
                     break;
                 int currentSlotIndex = item.transform.parent.GetSiblingIndex() ;
                 int nextSlotIndex = item.transform.parent.GetSiblingIndex() + 1;
-                Slots currentSlot = BarContainer.transform.GetChild(currentSlotIndex).GetComponent<Slots>();
-                currentSlot.TileMahjong = null;
                 Slots newSlotToTransfer = BarContainer.transform.GetChild(nextSlotIndex).GetComponent<Slots>();
                 newSlotToTransfer.AttachTile(item,true);
+                Slots currentSlot = BarContainer.transform.GetChild(currentSlotIndex).GetComponent<Slots>();
+                currentSlot.TileMahjong = null;
             }
         }
         public async void ResetTilesPosition(List<MahjongTile> listMahjongTiles)
