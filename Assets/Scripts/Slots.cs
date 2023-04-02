@@ -20,7 +20,7 @@ namespace Slot
             mahjongTile.transform.SetParent(transform) ;
             mahjongTile.transform.localScale = GameManager.Instance.TileToSlotAutoScale;
             await MoveDoTween(mahjongTile,doLocalJump);
-
+            
         }
         public async Task MoveDoTween(MahjongTile mahjongTile,bool doLocalJump)
         {

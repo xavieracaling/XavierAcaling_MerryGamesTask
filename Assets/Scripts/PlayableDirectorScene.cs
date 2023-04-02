@@ -10,6 +10,8 @@ public class PlayableDirectorScene : MonoBehaviour
     public PlayableDirector GoToGame;
     public PlayableDirector ShowGame;
     public PlayableDirector NotShowGame;
+    public PlayableDirector StatusShow;
+    public PlayableDirector StatusLeave;
     private void Awake() {
         Instance = this;
     }

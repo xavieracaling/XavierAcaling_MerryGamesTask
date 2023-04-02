@@ -61,6 +61,7 @@ namespace Manager.Bar
                 if(listMahjongTiles.Count == attachedIndex ) break;
             }
             GameManager.Instance.GlobalMahjongAbleToInteract = true;
+            GameManager.Instance.CheckTilesCleared();
         }
         public List<MahjongTile>  GetRemainingTiles(int indexStart)
         {
@@ -73,6 +74,11 @@ namespace Manager.Bar
             }
             return listMahjongTiles;
         }
+        public async void DurationSetMahjongTileVisibility(bool visible, GameObject g)
+        {
+            await new WaitForSeconds(0.6f);
+            g.gameObject.SetActive(visible);
+        }
         public async Task ThreeSameTilesFound(List<MahjongTile> listMahjongTiles, List<MahjongTile> remainingTiles)
         {
             Debug.Log("Same three Tiles!!");
@@ -83,7 +89,7 @@ namespace Manager.Bar
                 item.ExplosionPS.Play();
                 Slots slot = item.transform.parent.GetComponent<Slots>();
                 slot.TileMahjong = null;
-                Destroy(item.gameObject,0.6f);
+                DurationSetMahjongTileVisibility(false,item.gameObject);
             }
             if(remainingTiles.Count > 0)    
             {
@@ -93,7 +99,7 @@ namespace Manager.Bar
             else 
             {
                 GameManager.Instance.GlobalMahjongAbleToInteract = true;
-                
+                GameManager.Instance.CheckTilesCleared();
             }
               
         }
