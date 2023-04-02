@@ -53,7 +53,7 @@ namespace Manager.Bar
             for (int i = 0; i < BarContainer.transform.childCount; i++)
             {
                 Slots slot = BarContainer.transform.GetChild(i).GetComponent<Slots>();
-                if(slot.TileMahjong == null)
+                if(slot.TileMahjong == null)    
                 {
                     slot.AttachTile(listMahjongTiles[attachedIndex],false);
                     attachedIndex++;
@@ -81,6 +81,8 @@ namespace Manager.Bar
             foreach (MahjongTile item in listMahjongTiles)
             {
                 item.ExplosionPS.Play();
+                Slots slot = item.transform.parent.GetComponent<Slots>();
+                slot.TileMahjong = null;
                 Destroy(item.gameObject,0.6f);
             }
             if(remainingTiles.Count > 0)    
